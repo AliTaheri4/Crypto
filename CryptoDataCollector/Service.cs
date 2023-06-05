@@ -53,7 +53,7 @@ public class Service : BackgroundService
        //  var sp = scope.ServiceProvider.GetRequiredService<LastByLuckBackground>(); await sp.Invoke();
 
 
-       await _context.Database.ExecuteSqlRawAsync("GetByLuckSpFilteringByLuckBTC1mResult");
+     //  await _context.Database.ExecuteSqlRawAsync("GetByLuckSpFilteringByLuckBTC1mResult");
 
       
         await Task.CompletedTask;

@@ -1,2 +1,0 @@
-2023-05-08 11:28:02 @[A-TAHERI-PRD] [EROR]<21> [Microsoft.EntityFrameworkCore.Database.Connection] An error occurred using the connection to database '' on server ''.
-2023-05-08 11:29:04 @[A-TAHERI-PRD] [EROR]<5> [Microsoft.EntityFrameworkCore.Database.Connection] An error occurred using the connection to database '' on server ''.
