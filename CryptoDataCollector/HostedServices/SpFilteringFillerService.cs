@@ -16,11 +16,11 @@ namespace MyProject.HostedServices
             _context = context;
             _configuration = configuration;
             _cache = cache;
-        }
+        } 
         public async Task Initializer()
         {
             var test = new SpFilteringModel();
-            var res = await GetByLuckSpFilteringByLuckBTC1mResult();
+            var res = await GetSpFilteringByLuckBTC1mResult();
             if (res?.Trades > 0)
             {
                 _cache.Set("ByLuckBTC1m", res);
@@ -43,7 +43,7 @@ namespace MyProject.HostedServices
             }
             test = _cache.Get<SpFilteringModel>("LastTwoBigCandlesBNB30m");
         }
-        public async Task<SpFilteringModel> GetByLuckSpFilteringByLuckBTC1mResult()
+        public async Task<SpFilteringModel> GetSpFilteringByLuckBTC1mResult()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace MyProject.HostedServices
                 var result = new SpFilteringModel();
                 var con = new SqlConnection(connection);
 
-                using (var cmd = new SqlCommand("[GetByLuckSpFilteringByLuckBTC1mResult]", con))
+                using (var cmd = new SqlCommand("[GetSpFilteringByLuckBTC1mResult]", con))
                 {
                     con.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
