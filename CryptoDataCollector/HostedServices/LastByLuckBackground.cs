@@ -24,7 +24,7 @@ namespace CryptoDataCollector.HostedServices
         public static TimeFrameType _timeFrame { get; set; } = TimeFrameType.Minute5;
         public int _lookback { get; set; } = 1250;
         public int _daysPeriod { get; set; } = (int)_timeFrame;// 5; FOR 5 TIMEFRAMETYPE -- 50 for 1Hour
-        public DateTime _start { get; set; } = new DateTime(2023, 04, 30, 15, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);
+        public DateTime _start { get; set; } = new DateTime(2023, 6, 2, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);
         public DateTime _till { get; set; } = DateTime.MinValue;  //new DateTime(2022, 12, 25, 0, 0, 0);//
         public DateTime _to { get; set; }
         public bool DataFromApi = false;

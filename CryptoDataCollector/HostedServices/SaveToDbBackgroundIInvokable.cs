@@ -27,7 +27,7 @@ namespace CryptoDataCollector.HostedServices
         public int _symbol { get; set; } = (int)Symbol.Bnb;
         public int _addTicks { get; set; } = 3600 * 48;
         public int _timeFrame { get; set; } = 1;
-        public DateTime _to { get; set; } = new DateTime(2023, 5, 10, 0, 0, 0);
+        public DateTime _to { get; set; } = new DateTime(2023, 6, 2, 0, 0, 0);
         //   public DateTime _to { get; set; } = new DateTime(2020, 3, 1, 0, 0, 0);
         public DateTime _getFrom { get; set; } = new DateTime(2030, 1, 1, 0, 0, 0);
         public SaveToDbBackgroundIInvokable(ApplicationDbContext context, IDbConnection dbConnection, IMediator mediator)

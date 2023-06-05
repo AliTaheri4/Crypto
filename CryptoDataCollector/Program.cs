@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using MediatR;
 using System.Reflection;
+using MyProject.HostedServices;
 
 namespace CryptoDataCollector
 {
@@ -54,7 +55,6 @@ namespace CryptoDataCollector
                 .ConfigureServices((hostContext, services) =>
                 {
                     // services.AddQuartz();
-                    services.AddMemoryCache();
                     services.AddTransient<SaveCandlesBackgroundInvokable>();
                     services.AddTransient<GenerateLastCandleByTicksBackgroundIInvokable>();
                     services.AddTransient<DoubleEmaMacdBackgroundIInvokable>();
@@ -66,6 +66,7 @@ namespace CryptoDataCollector
                     services.AddTransient<SaveToDbBackgroundIInvokable>();
                     services.AddTransient<CalculationProsConsBackgroundIInvokable>();
                     services.AddTransient<FSPBackgroundJob>();
+                    services.AddSingleton<SpFilteringFillerService>();
                     Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(hostContext.Configuration)
                     .CreateLogger();
@@ -79,9 +80,10 @@ namespace CryptoDataCollector
                         dbContextOptions.EnableSensitiveDataLogging(false);
                         //if (!_isProduction)
                         // dbContextOptions.UseLoggerFactory(LoggerFactory.Create(c => c.AddConsole())).EnableSensitiveDataLogging();
-                    }, ServiceLifetime.Scoped);
+                    }, ServiceLifetime.Singleton);
                     services.AddHostedService<Service>();
                     services.AddMediatR(Assembly.GetExecutingAssembly());
+                    services.AddMemoryCache();
                 })
                   .ConfigureWebHostDefaults(webBuilder =>
                   {
@@ -113,19 +115,5 @@ namespace CryptoDataCollector
             return builder;
 
         }
-
-
-
-    }
-    public class Chart
-    {
-
-        public List<decimal> o { get; set; }
-        public List<decimal> h { get; set; }
-        public List<decimal> l { get; set; }
-        public List<decimal> c { get; set; }
-        public List<long> t { get; set; }
-        public List<decimal> v { get; set; }
-        public string s { get; set; }
     }
 }

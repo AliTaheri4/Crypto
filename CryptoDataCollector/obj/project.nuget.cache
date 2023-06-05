@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aTuHp2ScMkZzyjt6TqXFY+YON/7jS3xmWbiBtI/H8hXbGyftS/zGdtiCASqFt5jVjOBMiB8Qyv1S6IIoa8v9ew==",
+  "dgSpecHash": "gjIi8ghHMsQHobUhtxHC0SzXpFkcgzNFTUXV3+FBBf2xjXrP+zjNlSp/W1xg3ZNgXx7BOvRSVdm+/UiyfR85Ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\a.taheri.PIKAD\\Source\\Repos\\Crypto\\CryptoDataCollector\\MyProject.csproj",
+  "projectFilePath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CryptoDataCollector\\MyProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\accord.math\\3.8.0\\accord.math.3.8.0.nupkg.sha512",
@@ -136,7 +136,6 @@
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.runtime.caching\\7.0.0\\system.runtime.caching.7.0.0.nupkg.sha512",
-    "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
     "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\system.security.cryptography.cng\\5.0.0\\system.security.cryptography.cng.5.0.0.nupkg.sha512",
