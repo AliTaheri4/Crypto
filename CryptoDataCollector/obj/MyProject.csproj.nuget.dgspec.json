@@ -4,6 +4,67 @@
     "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CryptoDataCollector\\MyProject.csproj": {}
   },
   "projects": {
+    "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\CommonObjects.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\CommonObjects.csproj",
+        "projectName": "CommonObjects",
+        "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\CommonObjects.csproj",
+        "packagesPath": "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\a.taheri.PIKAD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CryptoDataCollector\\MyProject.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -30,6 +91,9 @@
             "projectReferences": {
               "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj": {
+                "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj"
               }
             }
           }
@@ -233,6 +297,82 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj",
+        "projectName": "Services",
+        "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\a.taheri.PIKAD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\a.taheri.PIKAD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\CommonObjects.csproj": {
+                "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\CommonObjects\\CommonObjects.csproj"
+              },
+              "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[108.0.3, )"
             }
           },
           "imports": [

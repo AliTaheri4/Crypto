@@ -24,7 +24,7 @@ namespace CryptoDataCollector.CheckForSignall
         public List<CandleStichDivergengeSRSignalCheckingModel> AllList { get; set; }
         public CandleStichDivergengeSRSignalCheckingModel LastCandle { get; set; }
         public TradeType _TradeType { get; set; }
-        public SignalType? _SignalType { get; set; } = SignalType.LastTwoCandle;
+        public SignalType? _SignalType { get; set; } = SignalType.LastTwoBigCandles;
         public ChartProcessType? _ProcessType { get; set; }
         public FutureSlopeType? _FutureSlopeType { get; set; }
         public PriceToMovingAverageType? _PriceToSmaType { get; set; }
@@ -73,7 +73,7 @@ namespace CryptoDataCollector.CheckForSignall
             if (step == 1)
             {
                 ////timeframe 5 min
-                _Symbol = Symbol.Bnb;
+                _Symbol = Symbol.BNB;
                 CountDecimal = 1;
                 _IsEmotional = false;
                 RR = 2M;
@@ -81,7 +81,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 2)
             {
-                _Symbol = Symbol.Ada;
+                _Symbol = Symbol.ADA;
                 CountDecimal = 4;
                 _IsEmotional = false;
                 RR = 2M;
@@ -90,7 +90,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 3)
             {
 
-                _Symbol = Symbol.Atom;
+                _Symbol = Symbol.ATOM;
                 CountDecimal = 3;
                 BigCandle = 1.1M; 
                 RR = 2M;
@@ -98,7 +98,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 4)
             {
-                _Symbol = Symbol.Xrp;
+                _Symbol = Symbol.XRP;
                 CountDecimal = 4;
                 _IsEmotional = false;
                 RR = 2M;
@@ -107,7 +107,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 5)
             {
-                _Symbol = Symbol.Sol;
+                _Symbol = Symbol.SOL;
                 CountDecimal = 2;
                 _IsEmotional = false;
                 RR = 2M;
@@ -116,7 +116,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 6)
             {
 
-                _Symbol = Symbol.Eth;
+                _Symbol = Symbol.ETH;
                 CountDecimal = 2;
                 _IsEmotional = false;
                 RR = 2M;
@@ -125,7 +125,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 7)
             {
-                _Symbol = Symbol.Btc;
+                _Symbol = Symbol.BTC;
                 CountDecimal = 2;
                 _IsEmotional = false;
                 RR = 2M;
@@ -198,7 +198,7 @@ namespace CryptoDataCollector.CheckForSignall
             if (mode1.HasTriggred && mode2.HasTriggred)
             {
 
-                _SignalType = SignalType.LastTwoCandle;
+                _SignalType = SignalType.LastTwoBigCandles;
                 AverageOf5LatestVolume = AllList.TakeLast(5).Average(p => p.Volume);
                 AverageOf10LatestVolume = AllList.TakeLast(10).Average(p => p.Volume);
                 return Buy();

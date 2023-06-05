@@ -73,14 +73,14 @@ namespace CryptoDataCollector.CheckForSignall
             if (step == 1)
             {
                 ////timeframe 5 min
-                _Symbol = Symbol.Bnb;
+                _Symbol = Symbol.BNB;
                 StopLoss = 0.25M;
                 CountDecimal = 1;
                 RR = 1.5M;
             }
             else if (step == 2)
             {
-                _Symbol = Symbol.Ada;
+                _Symbol = Symbol.ADA;
                 StopLoss = 0.4M;
                 CountDecimal = 4;
                 RR = 1.5M;
@@ -88,19 +88,19 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 3)
             {
 
-                _Symbol = Symbol.Atom;
+                _Symbol = Symbol.ATOM;
 
             }
             else if (step == 4)
             {
-                _Symbol = Symbol.Xrp;
+                _Symbol = Symbol.XRP;
                 StopLoss = 0.48M;//percent
                 CountDecimal = 4;
                 RR = 1.5M;
             }
             else if (step == 5)
             {
-                _Symbol = Symbol.Sol;
+                _Symbol = Symbol.SOL;
                 StopLoss = 0.4M;//percent
                 CountDecimal = 2;
                 RR = 1.5M;
@@ -108,7 +108,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 6)
             {
 
-                _Symbol = Symbol.Eth;
+                _Symbol = Symbol.ETH;
                 StopLoss = 0.32M;//percent
                 CountDecimal = 2;
                 RR = 1.5M;
@@ -117,7 +117,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 7)
             {
                 ////timeframe 5 min
-                _Symbol = Symbol.Btc;
+                _Symbol = Symbol.BTC;
                 //StopLoss = 0.25M;//percent
                 CountDecimal = 2;
                 //RR = 1.5M;

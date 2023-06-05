@@ -111,7 +111,7 @@ namespace CryptoDataCollector.CheckForSignall
 
             if (step == 1)
             {
-                _Symbol = Symbol.Bnb;
+                _Symbol = Symbol.BNB;
                 Changable = 0.01m;
                 DecimalCount = 2; //count of changable digit places
                 BigCandle = 1.20m; // percent from low to high
@@ -125,7 +125,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 2)
             {
-                _Symbol = Symbol.Ada;
+                _Symbol = Symbol.ADA;
                 Changable = 0.0001M; //1;// 0.1M;// 0.0001M; // 0.1M;
                 DecimalCount = 4;
                 BigCandle = 0.8M;
@@ -140,7 +140,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 3)
             {
 
-                _Symbol = Symbol.Atom;
+                _Symbol = Symbol.ATOM;
                 Changable = 0.0001M;
                 DecimalCount = 4;
                 BigCandle = 1.5M;
@@ -154,7 +154,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             if (step == 4)
             {
-                _Symbol = Symbol.Xrp;
+                _Symbol = Symbol.XRP;
                 Changable = 0.01m;
                 DecimalCount = 2; //count of changable digit places
                 BigCandle = 1.20m; // percent from low to high
@@ -168,7 +168,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 5)
             {
-                _Symbol = Symbol.Sol;
+                _Symbol = Symbol.SOL;
                 Changable = 0.0001M; //1;// 0.1M;// 0.0001M; // 0.1M;
                 DecimalCount = 4;
                 BigCandle = 0.8M;
@@ -183,7 +183,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 6)
             {
 
-                _Symbol = Symbol.Eth;
+                _Symbol = Symbol.ETH;
                 Changable = 0.0001M;
                 DecimalCount = 4;
                 BigCandle = 1.5M;

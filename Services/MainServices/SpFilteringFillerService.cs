@@ -1,10 +1,11 @@
 ﻿using CryptoDataCollector.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using MyProject.Models;
 using System.Data;
 
-namespace MyProject.HostedServices
+namespace Services.HostedServices
 {
     public class SpFilteringFillerService
     {

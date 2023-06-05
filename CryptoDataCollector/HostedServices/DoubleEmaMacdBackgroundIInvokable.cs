@@ -22,7 +22,7 @@ namespace CryptoDataCollector.HostedServices
         public DateTime FirstRequestDateTime { get; set; } = DateTime.MinValue;
         public TimeFrameType _timeFrame { get; set; } = TimeFrameType.Hour1;
 
-        public int _symbol { get; set; } = (int)Symbol.Btc;
+        public int _symbol { get; set; } = (int)Symbol.BTC;
         public DateTime _to { get; set; } = new DateTime(2022, 6, 1, 0, 30, 0);
 
         public DoubleEmaMacdBackgroundIInvokable(ApplicationDbContext context, IDbConnection dbConnection)

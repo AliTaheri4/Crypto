@@ -16,6 +16,7 @@ bin
 v17
 [Vv]17/
 .vs/
+obj/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

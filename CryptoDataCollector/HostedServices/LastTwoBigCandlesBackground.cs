@@ -8,6 +8,7 @@ using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Services.MainServices;
 using Skender.Stock.Indicators;
 using System.Data;
 using System.Xml.Linq;
@@ -17,14 +18,16 @@ namespace CryptoDataCollector.HostedServices
     public class LastTwoBigCandlesBackground : IInvocable
 
     {
+        public TradeServices _tradeServices { get; set; }
         public ApplicationDbContext _context { get; set; }
         public readonly IDbConnection _dbConnection;
         public List<CandleStichDivergengeSRSignalCheckingModel> List { get; set; } = new List<CandleStichDivergengeSRSignalCheckingModel>();
-        public int _symbol { get; set; } = (int)Symbol.Atom;
+        public int _symbol { get; set; } = (int)Symbol.BTC;
+        public SignalType _signalType { get; set; } = SignalType.LastTwoBigCandles;
         public static TimeFrameType _timeFrame { get; set; } = TimeFrameType.Minute30;
         public int _lookback { get; set; } = 1250;
         public int _daysPeriod { get; set; } = (int)_timeFrame;// 5; FOR 5 TIMEFRAMETYPE -- 50 for 1Hour
-        public DateTime _start { get; set; } = new DateTime(2023, 4, 30 , 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);
+        public DateTime _start { get; set; } = new DateTime(2023, 5, 31, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);// new DateTime(2020, 4, 5, 0, 0, 0);
         public DateTime _till { get; set; } = DateTime.MinValue;  //new DateTime(2022, 12, 25, 0, 0, 0);//
         public DateTime _to { get; set; }
         public bool DataFromApi = false;
@@ -33,8 +36,9 @@ namespace CryptoDataCollector.HostedServices
         public DateTime LastRequestDateTime { get; set; } = DateTime.MinValue;
         public DateTime FirstRequestDateTime { get; set; } = DateTime.MinValue;
 
-        public LastTwoBigCandlesBackground(ApplicationDbContext context, IDbConnection dbConnection)
+        public LastTwoBigCandlesBackground(TradeServices tradeServices,ApplicationDbContext context, IDbConnection dbConnection)
         {
+            _tradeServices=tradeServices;
             _context = context;
             _dbConnection = dbConnection;
             if (SavingData)
@@ -261,7 +265,15 @@ namespace CryptoDataCollector.HostedServices
                     LastRequestDateTime = List.Last().DateTime;
                     if (resultType == Enums.SignalCheckerType.Buy)
                     {
+
                         Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        _ = await _tradeServices.StartBuyProcessing(new Domain.Models.TradeIndexModel()
+                        {
+                            Symbol = (Symbol)_symbol,
+                            SignalType = _signalType,
+                            BuyTime = LastRequestDateTime.AddMinutes((int)_timeFrame),
+                            TimeFrameType = _timeFrame
+                        });
 
                         for (int i = 0; i < 1; i++)
                         {

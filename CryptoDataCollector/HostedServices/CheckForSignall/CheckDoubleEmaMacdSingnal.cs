@@ -64,7 +64,7 @@ namespace CryptoDataCollector.CheckForSignall
 
             if (step == 1)
             {
-                _Symbol = Symbol.Bnb;
+                _Symbol = Symbol.BNB;
                 DistanceFromResistence = 0.3M;//percent
                 MinLoss = 0.025M;//percent
                 MaxLoss = 20M;
@@ -72,29 +72,29 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (step == 2)
             {
-                _Symbol = Symbol.Ada;
+                _Symbol = Symbol.ADA;
 
             }
             else if (step == 3)
             {
 
-                _Symbol = Symbol.Atom;
+                _Symbol = Symbol.ATOM;
 
             }
            else if (step == 4)
             {
-                _Symbol = Symbol.Xrp;
+                _Symbol = Symbol.XRP;
 
             }
             else if (step == 5)
             {
-                _Symbol = Symbol.Sol;
+                _Symbol = Symbol.SOL;
 
             }
             else if (step == 6)
             {
 
-                _Symbol = Symbol.Eth;
+                _Symbol = Symbol.ETH;
                 DistanceFromResistence = 0.2M;//percent
                 MinLoss = 0.025M;//percent
                 MaxLoss = 20M;
@@ -104,7 +104,7 @@ namespace CryptoDataCollector.CheckForSignall
             else if (step == 7)
             {
 
-                _Symbol = Symbol.Btc;
+                _Symbol = Symbol.BTC;
                 DistanceFromResistence = 0.1M;//percent
                 MinLoss = 0.25M;//percent
                 MaxLoss = 2M;

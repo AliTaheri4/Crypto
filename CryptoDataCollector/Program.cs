@@ -8,7 +8,9 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using MediatR;
 using System.Reflection;
-using MyProject.HostedServices;
+using Services.MainServices;
+using Services.HostedServices;
+using CryptoDataCollector.Enums;
 
 namespace CryptoDataCollector
 {
@@ -18,6 +20,8 @@ namespace CryptoDataCollector
 
         public static void Main(string[] args)
         {
+            var symbol = Symbol.BTC;
+            Console.WriteLine($@"{symbol} sdxs");
             string appSettingFileName = "appsettings.json";
 
             var hostBuilder = Host.CreateDefaultBuilder(args);
@@ -67,6 +71,7 @@ namespace CryptoDataCollector
                     services.AddTransient<CalculationProsConsBackgroundIInvokable>();
                     services.AddTransient<FSPBackgroundJob>();
                     services.AddSingleton<SpFilteringFillerService>();
+                    services.AddSingleton<TradeServices>();
                     Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(hostContext.Configuration)
                     .CreateLogger();

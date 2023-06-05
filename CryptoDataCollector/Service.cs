@@ -16,7 +16,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using MyProject.Models;
 using CryptoDataCollector.Data;
-using MyProject.HostedServices;
+using Services.HostedServices;
 
 namespace CryptoDataCollector;
 public class Service : BackgroundService
@@ -47,9 +47,9 @@ public class Service : BackgroundService
         }
         using var scope = _scopeFactory.CreateScope();
 
-       // var sp = scope.ServiceProvider.GetRequiredService<SaveToDbBackgroundIInvokable>();   await sp.Invoke();
+      //  var sp = scope.ServiceProvider.GetRequiredService<SaveToDbBackgroundIInvokable>();   await sp.Invoke();
 
-         //    var sp = scope.ServiceProvider.GetRequiredService<LastTwoBigCandlesBackground>(); await sp.Invoke();
+            var sp = scope.ServiceProvider.GetRequiredService<LastTwoBigCandlesBackground>(); await sp.Invoke();
        //  var sp = scope.ServiceProvider.GetRequiredService<LastByLuckBackground>(); await sp.Invoke();
 
 

@@ -44,7 +44,7 @@ namespace MyProject.Handlers
         public static List<TickModel> AllList { get; set; } = new List<TickModel>();
         public List<SmaSignalCheckingModel> List { get; set; } = new List<SmaSignalCheckingModel>();
         public DateTime LastRequestDateTime { get; set; } = DateTime.Now;
-        public int _symbol { get; set; } = (int)Symbol.Bnb;
+        public int _symbol { get; set; } = (int)Symbol.BNB;
         public int _addTicks { get; set; } = 3600 * 4;
         public int _timeFrame { get; set; } = 1;
         public DateTime _to { get; set; } = DateTime.Now; //new DateTime(2023, 5, 7, 0, 0, 0);

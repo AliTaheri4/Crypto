@@ -622,7 +622,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration.Binder/7.0.0": {
+      "Microsoft.Extensions.Configuration.Binder/7.0.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
@@ -2620,6 +2620,19 @@
           "lib/netstandard2.1/TALib.NETCore.dll": {}
         }
       },
+      "CommonObjects/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Binder": "7.0.4"
+        },
+        "compile": {
+          "bin/placeholder/CommonObjects.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommonObjects.dll": {}
+        }
+      },
       "Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -2631,6 +2644,23 @@
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "CommonObjects": "1.0.0",
+          "Domain": "1.0.0",
+          "Microsoft.Data.SqlClient": "5.0.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
+          "RestSharp": "108.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
         }
       }
     }
@@ -3361,10 +3391,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Configuration.Binder/7.0.0": {
-      "sha512": "tgU4u7bZsoS9MKVRiotVMAwHtbREHr5/5zSEV+JPhg46+ox47Au84E3D2IacAaB0bk5ePNaNieTlPrfjbbRJkg==",
+    "Microsoft.Extensions.Configuration.Binder/7.0.4": {
+      "sha512": "8+XPvJnHZsYgHOQlcMuQe7QNF5KdVKHH1F/wW3nd8/u81Gk/XFAYMDP0Lpz18h7/AM95M662vvqMorcYxCBB4w==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.binder/7.0.0",
+      "path": "microsoft.extensions.configuration.binder/7.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3383,7 +3413,7 @@
         "lib/net7.0/Microsoft.Extensions.Configuration.Binder.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.xml",
-        "microsoft.extensions.configuration.binder.7.0.0.nupkg.sha512",
+        "microsoft.extensions.configuration.binder.7.0.4.nupkg.sha512",
         "microsoft.extensions.configuration.binder.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -7591,10 +7621,20 @@
         "talib.png"
       ]
     },
+    "CommonObjects/1.0.0": {
+      "type": "project",
+      "path": "../CommonObjects/CommonObjects.csproj",
+      "msbuildProject": "../CommonObjects/CommonObjects.csproj"
+    },
     "Domain/1.0.0": {
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7628,6 +7668,7 @@
       "Serilog.Settings.Configuration >= 3.3.0",
       "Serilog.Sinks.Console >= 4.1.0",
       "Serilog.Sinks.Seq >= 5.1.1",
+      "Services >= 1.0.0",
       "Skender.Stock.Indicators >= 2.4.5",
       "System.Runtime.Caching >= 7.0.0",
       "TALib.NETCore >= 0.4.4"
@@ -7662,6 +7703,9 @@
           "projectReferences": {
             "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj": {
               "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Domain\\Domain.csproj"
+            },
+            "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj": {
+              "projectPath": "C:\\Users\\a.taheri.PIKAD\\source\\repos\\Crypto\\Services\\Services.csproj"
             }
           }
         }

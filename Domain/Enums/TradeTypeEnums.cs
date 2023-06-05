@@ -52,7 +52,7 @@ namespace CryptoDataCollector.Enums
         Fsp=5,
         DoubleEmaMacd=6,
         DivergenceCandleStickSr=7,
-        LastTwoCandle=8,
+        LastTwoBigCandles=8,
         ByLuck=9
     }
     public enum PriceToMovingAverageType
@@ -79,26 +79,35 @@ namespace CryptoDataCollector.Enums
     }
     public enum Symbol
     {
-        Bnb = 1,
-        Ada = 2,
-        Atom = 3,
-        Xrp = 4,
-        Sol = 5,
-        Eth = 6,
-        Btc = 7,
+        BNB = 1,
+        ADA = 2,
+        ATOM = 3,
+        XRP = 4,
+        SOL = 5,
+        ETH = 6,
+        BTC = 7,
     }
     public enum TimeFrameType
     {
-
+        [Description("1m")]
         Minute1 = 1,
+        [Description("5m")]
         Minute5 = 5,
+        [Description("10m")]
         Minute10 = 10,
+        [Description("15m")]
         Minute15 = 15,
+        [Description("30m")]
         Minute30 = 30,
+        [Description("45m")]
         Minute45 = 45,
+        [Description("1h")]
         Hour1 = 60,
+        [Description("2h")]
         Hour2 = 120,
+        [Description("4h")]
         Hour4 = 240,
+        [Description("D")]
         Day = 1440,
         //Week = 31,
         //Month1 = 40,

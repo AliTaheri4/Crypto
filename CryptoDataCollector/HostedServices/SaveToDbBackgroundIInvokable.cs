@@ -24,7 +24,7 @@ namespace CryptoDataCollector.HostedServices
         public readonly IDbConnection _dbConnection;
         public List<SmaSignalCheckingModel> List { get; set; } = new List<SmaSignalCheckingModel>();
         public DateTime LastRequestDateTime { get; set; } = DateTime.Now;
-        public int _symbol { get; set; } = (int)Symbol.Bnb;
+        public int _symbol { get; set; } = (int)Symbol.BNB;
         public int _addTicks { get; set; } = 3600 * 48;
         public int _timeFrame { get; set; } = 1;
         public DateTime _to { get; set; } = new DateTime(2023, 6, 2, 0, 0, 0);

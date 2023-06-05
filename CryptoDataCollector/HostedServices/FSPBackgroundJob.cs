@@ -20,7 +20,7 @@ namespace CryptoDataCollector.HostedServices
     public class FSPBackgroundJob : IInvocable
     {
         public ApplicationDbContext _context { get; set; }
-        public int _symbol { get; set; } = (int)Symbol.Bnb;
+        public int _symbol { get; set; } = (int)Symbol.BNB;
         public DateTime _to { get; set; } = new DateTime(2023, 1, 31, 0, 0, 0);
 
         public FSPBackgroundJob(ApplicationDbContext context)

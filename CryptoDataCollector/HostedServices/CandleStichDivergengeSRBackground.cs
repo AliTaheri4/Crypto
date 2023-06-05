@@ -20,7 +20,7 @@ namespace CryptoDataCollector.HostedServices
         public ApplicationDbContext _context { get; set; }
         public readonly IDbConnection _dbConnection;
         public List<CandleStichDivergengeSRSignalCheckingModel> List { get; set; } = new List<CandleStichDivergengeSRSignalCheckingModel>();
-        public int _symbol { get; set; } = (int)Symbol.Btc;
+        public int _symbol { get; set; } = (int)Symbol.BTC;
         public static TimeFrameType _timeFrame { get; set; } = TimeFrameType.Hour1;
         public int _lookback { get; set; } = 1320;
         public int _daysPeriod { get; set; } = (int)_timeFrame;// 5; FOR 5 TIMEFRAMETYPE -- 50 for 1Hour
