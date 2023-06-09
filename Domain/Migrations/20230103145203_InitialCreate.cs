@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CryptoDataCollector.Migrations
+namespace Domain.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

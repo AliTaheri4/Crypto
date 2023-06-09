@@ -1,13 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CryptoDataCollector.Data;
+using Domain.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoDataCollector.Data
+namespace Domain.Data
 {
+    internal static class IConfigurationRootExtensions
+    {
+        public static IConfigurationBuilder AddBasePath(this IConfigurationBuilder builder)
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var startupProjectPath = Path.Combine(currentDirectory, "../CryptoDataCollector");
+            var basePathConfiguration = Directory.Exists(startupProjectPath) ? startupProjectPath : currentDirectory;
+
+            return builder.SetBasePath(basePathConfiguration);
+        }
+    }
     public class ApplicationDbContext : DbContext
     {
 
@@ -69,12 +84,25 @@ namespace CryptoDataCollector.Data
                 }
             }
         }
+        public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+        {
+            public ApplicationDbContext CreateDbContext(string[] args)
+            {
+                var config = new ConfigurationBuilder().AddBasePath().AddJsonFile("appsettings.json").AddCommandLine(args).Build();
+                var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("Crypto"));
+                //optionsBuilder.UseSqlServer("Data Source=.; Initial Catalog=Crypto; Trusted_Connection=True; MultipleActiveResultSets=true;TrustServerCertificate=true");
+
+                return new ApplicationDbContext(optionsBuilder.Options);
+            }
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
         public DbSet<Signal> Signals { get; set; }
         public DbSet<Trade> Trades { get; set; }
         public DbSet<Candle> Candles { get; set; }
+        public DbSet<Asset> Assets { get; set; }
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //=> optionsBuilder.ConfigureWarnings(c => c.Log((RelationalEventId.CommandExecuting, LogLevel.Debug)));
 

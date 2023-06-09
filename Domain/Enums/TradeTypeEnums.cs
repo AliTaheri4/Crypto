@@ -86,6 +86,7 @@ namespace CryptoDataCollector.Enums
         SOL = 5,
         ETH = 6,
         BTC = 7,
+        USDT = 100,
     }
     public enum TimeFrameType
     {

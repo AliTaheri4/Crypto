@@ -4,12 +4,13 @@ using Bybit.Net.Objects.Models.V5;
 using CryptoDataCollector;
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
-using CryptoDataCollector.Models;
+using Domain.Models;
 using CryptoExchange.Net.Sockets;
 using MediatR;
 using MediatR.Wrappers;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MyProject.Models;
 using Newtonsoft.Json;
 using RepoDb;
@@ -22,6 +23,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using CryptoDataCollector.Models;
+using Domain.Data;
 
 namespace MyProject.Handlers
 {

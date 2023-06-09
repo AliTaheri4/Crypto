@@ -1,5 +1,6 @@
 ﻿using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
+using Domain.Data;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
@@ -51,7 +52,7 @@ namespace Services.MainServices
                     case SignalType.DivergenceCandleStickSr:
                         break;
                     case SignalType.LastTwoBigCandles:
-                        list.Add(_cache.Get<SpFilteringModel>(@$"{SignalType.LastTwoBigCandles}{model.Symbol}{model.TimeFrameType.GetEnumDescription()}"));
+                        list.Add(_cache.Get<SpFilteringModel>(@$"{SignalType.LastTwoBigCandles}{model.Symbol}{model.TimeFrameType.GetEnumDescription()}") ?? new SpFilteringModel());
                         list.Add(await _spFilteringFiller.GetSpFilteringLastTwoBigCandlesBTC30mResult());
                         break;
                     case SignalType.ByLuck:
@@ -79,6 +80,7 @@ namespace Services.MainServices
         }
         public async Task<decimal> PriceManagement()
         {
+            var assets = await _context.Assets.Where(p => p.Symbol == Symbol.USDT).AsNoTracking().SingleOrDefaultAsync();
             return 0;
         }
 

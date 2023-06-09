@@ -4,6 +4,7 @@ using CryptoDataCollector.CheckForSignall;
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
+using Domain.Data;
 using MediatR;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace CryptoDataCollector.HostedServices
     {
         public ApplicationDbContext _context { get; set; }
         public IMediator _mediator { get; set; }
-    
+
         public SaveCandlesBackgroundInvokable(ApplicationDbContext context, IMediator mediator)
         {
             _context = context;
@@ -29,9 +30,13 @@ namespace CryptoDataCollector.HostedServices
         }
 
         public async Task Invoke()
-       {
-            await _mediator.Send(new SaveCandlesCommand());
+        {
+            var now = DateTime.Now;
+            var nowSecond = now.Second * 1000 + now.Microsecond;
+            if (nowSecond >= 50000 && nowSecond < 59000)
+                Console.WriteLine(now.ToString() + " " + now.Microsecond+"======"+ nowSecond.ToString());
+            // await _mediator.Send(new SaveCandlesCommand());
         }
-     
+
     }
 }

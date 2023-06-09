@@ -3,6 +3,7 @@ using CryptoDataCollector.BussinesExtensions.Helper;
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
+using Domain.Data;
 using Newtonsoft.Json;
 using Quartz;
 using Skender.Stock.Indicators;

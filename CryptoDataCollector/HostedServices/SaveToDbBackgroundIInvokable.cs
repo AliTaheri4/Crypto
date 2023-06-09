@@ -4,6 +4,7 @@ using CryptoDataCollector.CheckForSignall;
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
+using Domain.Data;
 using MediatR;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;

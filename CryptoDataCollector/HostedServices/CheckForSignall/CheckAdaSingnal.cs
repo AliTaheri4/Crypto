@@ -2,6 +2,7 @@
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
+using Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -4,6 +4,7 @@ using CryptoDataCollector.BussinesExtensions;
 using CryptoDataCollector.Data;
 using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
+using Domain.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RepoDb;
@@ -92,8 +93,8 @@ namespace CryptoDataCollector.CheckForSignall
 
                 _Symbol = Symbol.ATOM;
                 CountDecimal = 3;
-                BigCandle = 1.1M; 
                 RR = 2M;
+                BigCandle = 1.1M;
                 _IsEmotional = false;
             }
             else if (step == 4)

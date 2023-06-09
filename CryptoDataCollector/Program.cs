@@ -11,6 +11,8 @@ using System.Reflection;
 using Services.MainServices;
 using Services.HostedServices;
 using CryptoDataCollector.Enums;
+using Domain.Data;
+using Services.BybitServices;
 
 namespace CryptoDataCollector
 {
@@ -72,6 +74,7 @@ namespace CryptoDataCollector
                     services.AddTransient<FSPBackgroundJob>();
                     services.AddSingleton<SpFilteringFillerService>();
                     services.AddSingleton<TradeServices>();
+                    services.AddSingleton<BybitFacade>();
                     Log.Logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(hostContext.Configuration)
                     .CreateLogger();
@@ -81,11 +84,12 @@ namespace CryptoDataCollector
 
                     services.AddDbContext<ApplicationDbContext>(dbContextOptions =>
                     {
-                        dbContextOptions.UseSqlServer(currentConnectionString, x => x.EnableRetryOnFailure(3).CommandTimeout(120));
+                        dbContextOptions.UseSqlServer(currentConnectionString, x => x.EnableRetryOnFailure(3).CommandTimeout(120).MigrationsAssembly("Domain"));
                         dbContextOptions.EnableSensitiveDataLogging(false);
                         //if (!_isProduction)
                         // dbContextOptions.UseLoggerFactory(LoggerFactory.Create(c => c.AddConsole())).EnableSensitiveDataLogging();
                     }, ServiceLifetime.Singleton);
+
                     services.AddHostedService<Service>();
                     services.AddMediatR(Assembly.GetExecutingAssembly());
                     services.AddMemoryCache();
@@ -107,7 +111,8 @@ namespace CryptoDataCollector
                           provider.UseScheduler(scheduler =>
                           {
                               if (!justSaveHistoryCandlesFromService)
-                                  scheduler.Schedule<SaveCandlesBackgroundInvokable>().Cron("* * * * *");
+                                 // scheduler.Schedule<SaveCandlesBackgroundInvokable>().Cron("* * * * *");
+                                  scheduler.Schedule<SaveCandlesBackgroundInvokable>().EveryTenSeconds();
 
                           });
                           app.UseEndpoints(endpoints =>
