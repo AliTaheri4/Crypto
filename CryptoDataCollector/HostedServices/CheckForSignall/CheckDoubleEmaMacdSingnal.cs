@@ -184,7 +184,7 @@ namespace CryptoDataCollector.CheckForSignall
             else
                 _TradeType = TradeType.Unkouwn;
 
-            if (SignalExtensions.SelectTopOfBodyCandle(new BaseSignalCheckingModel()
+            if (SignalExtensions.SelectTopOfBodyCandle(new BaseRichCandleStickModel()
             {
                 Open = LastCandle.Open,
                 High = LastCandle.High,
@@ -193,7 +193,7 @@ namespace CryptoDataCollector.CheckForSignall
                 DateTime = LastCandle.DateTime,
                 Volume = LastCandle.Volume
             }) < (decimal)LastCandle.Ema20 ||
-             SignalExtensions.SelectBottomOfBodyCandle(new BaseSignalCheckingModel()
+             SignalExtensions.SelectBottomOfBodyCandle(new BaseRichCandleStickModel()
              {
                  Open = LastCandle.Open,
                  High = LastCandle.High,

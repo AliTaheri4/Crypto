@@ -57,10 +57,13 @@ public class Service : BackgroundService
         }
         using var scope = _scopeFactory.CreateScope();
 
-        //  var sp = scope.ServiceProvider.GetRequiredService<SaveToDbBackgroundIInvokable>();   await sp.Invoke();
+         // var sp = scope.ServiceProvider.GetRequiredService<SaveToDbBackgroundIInvokable>();   await sp.Invoke();
 
      //  var sp = scope.ServiceProvider.GetRequiredService<LastTwoBigCandlesBackground>(); await sp.Invoke();
       //    var sp = scope.ServiceProvider.GetRequiredService<LastByLuckBackground>(); await sp.Invoke();
+      
+        
+        await _mediator.Send(new StratgyRunnerCommand());
 
 
         //  await _context.Database.ExecuteSqlRawAsync("GetByLuckSpFilteringByLuckBTC1mResult");

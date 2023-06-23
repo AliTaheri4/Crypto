@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CryptoDataCollector.Models
 {
-    public class BaseSignalCheckingModel
+    public class BaseRichCandleStickModel
     {
         public DateTime DateTime { get; set; }
         public decimal Open { get; set; }

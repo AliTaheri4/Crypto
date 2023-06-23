@@ -20,7 +20,7 @@ namespace CryptoDataCollector.HostedServices
     {
         public ApplicationDbContext _context { get; set; }
         public readonly IDbConnection _dbConnection;
-        public List<CandleStichDivergengeSRSignalCheckingModel> List { get; set; } = new List<CandleStichDivergengeSRSignalCheckingModel>();
+        public List<RichCandleStickModel> List { get; set; } = new List<RichCandleStickModel>();
         public int _symbol { get; set; } = (int)Symbol.BTC;
         public static TimeFrameType _timeFrame { get; set; } = TimeFrameType.Hour1;
         public int _lookback { get; set; } = 1320;
@@ -214,12 +214,12 @@ namespace CryptoDataCollector.HostedServices
 
 
 
-                    var listTemp = new List<CandleStichDivergengeSRSignalCheckingModel>();
+                    var listTemp = new List<RichCandleStickModel>();
                     for (int i = 1; i < quotesList.Count; i++)
                     {
 
                         if (i <= quotesListCount)
-                            listTemp.Add(new CandleStichDivergengeSRSignalCheckingModel()
+                            listTemp.Add(new RichCandleStickModel()
                             {
                                 Open = quotesList[i].Open,
                                 High = quotesList[i].High,

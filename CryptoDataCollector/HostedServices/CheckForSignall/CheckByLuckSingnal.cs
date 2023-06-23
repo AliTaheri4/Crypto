@@ -7,6 +7,7 @@ using CryptoDataCollector.Models;
 using Domain.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using MyProject.HostedServices.CheckForSignall;
 using RepoDb;
 using Skender.Stock.Indicators;
 using System.Collections;
@@ -19,11 +20,11 @@ using System.Text;
 
 namespace CryptoDataCollector.CheckForSignall
 {
-    public class CheckByLuckSingnal
+    public class CheckByLuckSingnal: ICheckSignal<RichCandleStickModel>
     {
 
-        public List<CandleStichDivergengeSRSignalCheckingModel> AllList { get; set; }
-        public CandleStichDivergengeSRSignalCheckingModel LastCandle { get; set; }
+        public List<RichCandleStickModel> AllList { get; set; }
+        public RichCandleStickModel LastCandle { get; set; }
         public TradeType _TradeType { get; set; }
         public SignalType? _SignalType { get; set; } = SignalType.ByLuck;
         public ChartProcessType? _ProcessType { get; set; }
@@ -143,7 +144,7 @@ namespace CryptoDataCollector.CheckForSignall
 
         }
 
-        public SignalCheckerType CheckStrategy(List<CandleStichDivergengeSRSignalCheckingModel> list, int step, TimeFrameType timeFrame)
+        public SignalCheckerType CheckStrategy(List<RichCandleStickModel> list, int step, TimeFrameType timeFrame)
         {
             SetParams(step);
             //   return SignalCheckerType.HaveBefore;
@@ -409,9 +410,9 @@ namespace CryptoDataCollector.CheckForSignall
 
         }
 
-        public BaseSignalCheckingModel GetBaseSignalCheckingModel(CandleStichDivergengeSRSignalCheckingModel model)
+        public BaseRichCandleStickModel GetBaseSignalCheckingModel(RichCandleStickModel model)
         {
-            return new BaseSignalCheckingModel()
+            return new BaseRichCandleStickModel()
             {
                 Close = model.Close,
                 High = model.High,
@@ -423,9 +424,9 @@ namespace CryptoDataCollector.CheckForSignall
                 Changable = (double)(model.Open + model.Close) / 2
             };
         }
-        public List<BaseSignalCheckingModel> GetBaseSignalCheckingList(List<CandleStichDivergengeSRSignalCheckingModel> list)
+        public List<BaseRichCandleStickModel> GetBaseSignalCheckingList(List<RichCandleStickModel> list)
         {
-            return list.Select(p => new BaseSignalCheckingModel()
+            return list.Select(p => new BaseRichCandleStickModel()
             {
                 Close = p.Close,
                 High = p.High,

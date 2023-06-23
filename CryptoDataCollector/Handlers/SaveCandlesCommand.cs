@@ -343,18 +343,18 @@ namespace MyProject.Handlers
         {
             Thread.Sleep(50000);
             var now = DateTime.Now;
-            var lastItemDt = AllList.Last().DateTime;
+            var lastItemDt = RemoceSecondTicks(AllList.Last().DateTime);
             var dt = new DateTime(lastItemDt.Year, lastItemDt.Month, lastItemDt.Day, lastItemDt.Hour, lastItemDt.Minute, 0);
-            AllList = AllList.Where(p => p.DateTime >= now.AddMinutes(-210).AddSeconds(-now.Second) && p.DateTime < now.AddMinutes(-210).AddSeconds(-now.Second).AddMinutes(1)).OrderBy(p => p.DateTime).ToList();
-            var groupby = AllList.GroupBy(p => p.Symbol).Select(p => new Candle()
+            AllList = AllList.Where(p => p.DateTime >= RemoceSecondTicks(now) && p.DateTime < RemoceSecondTicks(now).AddMinutes(1)).OrderBy(p => p.DateTime).ToList();
+            var groupby = AllList.GroupBy(p =>new { p.Symbol , DateTime = RemoceSecondTicks(p.DateTime,false)}).Select(p => new Candle()
             {
                 Open = p.OrderBy(o => o.DateTime).First().Price,
                 High = p.Max(p => p.Price),
                 Low = p.Min(p => p.Price),
                 Close = p.OrderBy(p => p.DateTime).Last().Price,
-                DateTime = dt,
-                Symbol = (int)p.Key,
-                SymbolName = p.Key.GetEnumDescription(),
+                DateTime = RemoceSecondTicks(p.Key.DateTime,false),
+                Symbol = (int)p.Key.Symbol,
+                SymbolName = p.Key.Symbol.GetEnumDescription(),
                 Ticks = SecondsFromDate(dt),
                 Volume = 1
             }).ToList();
@@ -366,8 +366,17 @@ namespace MyProject.Handlers
                        batchSize: 5000
                       );
 
-            AllList.Clear();
+            AllList=AllList.Where(p=>p.DateTime >= RemoceSecondTicks(now).AddMinutes(-3)).ToList();
+            //AllList.Clear();
             return;
+        }
+        public DateTime RemoceSecondTicks(DateTime dateTime,bool toPersianDt=true)
+        {
+            var dt = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0);
+            if (toPersianDt)
+                dt=  dt.AddMinutes(-210);
+
+            return dt;
         }
 
 

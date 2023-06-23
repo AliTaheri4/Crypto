@@ -1,77 +1,64 @@
-﻿//using Bybit.Net.Clients;
-//using Bybit.Net.Objects.Models.Socket;
-//using Bybit.Net.Objects.Models.V5;
-//using CryptoDataCollector.Data;
-//using CryptoExchange.Net.Sockets;
-//using MediatR;
-//using MediatR.Wrappers;
-//using System.Collections.Generic;
-//using System.Threading;
+﻿using Bybit.Net.Clients;
+using Bybit.Net.Objects.Models.V5;
+using CryptoDataCollector.HostedServices;
+using CryptoExchange.Net.Sockets;
+using MediatR;
+using MyProject.Models;
+using Symbol = CryptoDataCollector.Enums.Symbol;
 
-//namespace MyProject.Handlers
-//{
-//    public class StreamCommand : IRequest
-//    {
+namespace MyProject.Handlers
+{
+    public class StreamCommand : IRequest
+    {
 
-//        public StreamCommand()
-//        {
-//        }
+        public StreamCommand()
+        {
+        }
 
-//    }
+    }
 
-//    public class StreamHandle : AsyncRequestHandler<StreamCommand>
-//    {
+    public class StreamHandler : AsyncRequestHandler<StreamCommand>
+    {
+        public List<string> Symbols { get; set; }
+        public List<TickModel> Prices { get; set; }
 
-//        public StreamHandle()
-//        {
-//        }
-//        protected override async Task Handle(StreamCommand request, CancellationToken cancellationToken)
-//        {
-//        }
+        public StreamHandler()
+        {
+            Symbols = GetAllSymbols();
+        }
+        protected override async Task Handle(StreamCommand request, CancellationToken cancellationToken)
+        {
+            var client = new BybitSocketClient();
+            var result = await client.V5SpotStreams.SubscribeToTickerUpdatesAsync(Symbols, async (p) => await GetTicker(p));
+        }
 
-
-
-//    }
-//    public class TestStream
-//    {
-//        private readonly IMediator _mediator;
-//        public int count = 0;
-//        public TestStream(IMediator mediator)
-//        {
-//            _mediator = mediator;
-//        }
-
-//        public async Task Init()
-//        {
-//            var client = new BybitSocketClient();
-//            dynamic test;
-//            var result = await client.V5SpotStreams.SubscribeToTickerUpdatesAsync(new List<string>() { "BTCUSDT" ,"ETHUSDT","BNBUSDT","XRPUSDT","ADAUSDT"}, async (p) => await GetTicker(p));
-//       //     var result = await client.V5LinearStreams.SubscribeToTradeUpdatesAsync("BTCUSDT", async (p) => await GetTrade(p));
-//      //      var result = await client.V5LinearStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", Bybit.Net.Enums.KlineInterval.OneMinute, async (p) =>await GetData(p));
-
-//        }
-//        public async Task GetTicker(DataEvent<BybitSpotTickerUpdate> model)
-//        {
-//            //      Thread.Sleep(5000);
-//            count++;
-//                  dynamic test;
-//                test = model;
-
-//            Console.WriteLine($@"{model.Data.Symbol} at: {model.Timestamp.AddMinutes(210)} | price: {model.Data.LastPrice}");  
-//        }
-//        public async Task GetTrade(DataEvent<IEnumerable<Bybit.Net.Objects.Models.V5.BybitTrade>> model)
-//        {
-//                Thread.Sleep(5000);
-//                dynamic test;
-//                test = model; 
-//                Console.WriteLine($@"BTCUSDT at: {model.Timestamp} | price: {model.Data.First().Price}");  
-//        }
-//        public async Task GetData(DataEvent<IEnumerable<Bybit.Net.Objects.Models.V5.BybitKlineUpdate>> model)
-//        {
-//                Thread.Sleep(5000);
-//                dynamic test;
-//                test = model;
-//                Console.WriteLine($@"BTCUSDT at: {model.Timestamp} | price: {model.Data.First().ClosePrice}");
-//        }
-//    }
-//}
+        public async Task GetTicker(DataEvent<BybitSpotTickerUpdate> model)
+        {
+            var enumStr = PascalCase(model.Data.Symbol.Replace("USDT", ""));
+            SaveCandlesHandler.AllList.Add(new TickModel()
+            {
+                DateTime = model.Timestamp,
+                Price = model.Data.LastPrice,
+                Symbol = Enum.Parse<Symbol>(enumStr)
+            });
+      //      Console.WriteLine($@"{model.Data.Symbol} at: {model.Timestamp.AddMinutes(210)} | price: {model.Data.LastPrice}");
+        }
+        public string PascalCase(string word)
+        {
+            return string.Join("", word.Split('_')
+                         .Select(w => w.Trim())
+                         .Where(w => w.Length > 0)
+                         .Select(w => w.Substring(0, 1).ToUpper() + w.Substring(1).ToLower()));
+        }
+        public List<string> GetAllSymbols()
+        {
+            var values = Enum.GetValues(typeof(Symbol));
+            var list = new List<string>();
+            foreach (var item in values)
+            {
+                list.Add($"{item}USDT".ToUpper());
+            }
+            return list;
+        }
+    }
+}

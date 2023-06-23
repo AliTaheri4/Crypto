@@ -13,21 +13,54 @@ using Services.HostedServices;
 using CryptoDataCollector.Enums;
 using Domain.Data;
 using Services.BybitServices;
+using System.Security.Cryptography.Xml;
 
 namespace CryptoDataCollector
 {
+    public class Person
+    {
+        public List<Person> GetPeople()
+        {
+            var now=DateTime.Now;
+            return new List<Person> { 
+                new Person() { Name="ali"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute,4)}, 
+                new Person() { Name="ali2"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+1,0)}, 
+                new Person() { Name="ali3"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+2,0)}, 
+                new Person() { Name="ali4"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute,0)}, 
+                new Person() { Name="ali5"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute,44)}, 
+                new Person() { Name="ali6"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+4,0)}, 
+                new Person() { Name="ali7"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+2,45)}, 
+                new Person() { Name="ali8"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+5,0)}, 
+                new Person() { Name="ali9"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+5,5)},
+                new Person() { Name="ali10"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+6,0)}, 
+                new Person() { Name="ali11"  , RegisterdTime=new DateTime(now.Year,now.Month,now.Day,now.Hour,now.Minute+6,0)}, 
+            
+            };
+        }
+        public string Name { get; set; }
+        public DateTime RegisterdTime { get; set; }
+    }
     public class Program
     {
         public static IConfiguration _configuration;
 
+        public static DateTime RemoceSecondTicks(DateTime dateTime, bool toPersianDt = true)
+        {
+            var dt = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0);
+            if (toPersianDt)
+                dt = dt.AddMinutes(-210);
+
+            return dt;
+        }
+
         public static void Main(string[] args)
         {
-            var symbol = Symbol.BTC;
-            Console.WriteLine($@"{symbol} sdxs");
+       //     var person = new Person();
+      //      var gb = person.GetPeople().GroupBy(p => new { DateTime = RemoceSecondTicks(p.RegisterdTime) }).Select(p => new { Ali = p.First().Name, Dt = p.Count() }).ToList();
             string appSettingFileName = "appsettings.json";
 
             var hostBuilder = Host.CreateDefaultBuilder(args);
-            Console.WriteLine(appSettingFileName);
+     //       Console.WriteLine(appSettingFileName);
 
             _configuration = new ConfigurationBuilder()
                     .AddJsonFile(appSettingFileName)

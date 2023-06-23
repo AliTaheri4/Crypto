@@ -22,8 +22,8 @@ namespace CryptoDataCollector.CheckForSignall
     public class CheckCandleStickDivergengeSRSingnal
     {
 
-        public List<CandleStichDivergengeSRSignalCheckingModel> AllList { get; set; }
-        public CandleStichDivergengeSRSignalCheckingModel LastCandle { get; set; }
+        public List<RichCandleStickModel> AllList { get; set; }
+        public RichCandleStickModel LastCandle { get; set; }
         public TradeType _TradeType { get; set; }
         public SignalType? _SignalType { get; set; }
         public ChartProcessType? _ProcessType { get; set; }
@@ -137,7 +137,7 @@ namespace CryptoDataCollector.CheckForSignall
 
         }
 
-        public SignalCheckerType CheckStrategy(List<CandleStichDivergengeSRSignalCheckingModel> list, int step)
+        public SignalCheckerType CheckStrategy(List<RichCandleStickModel> list, int step)
         {
             SetParams(step);
             //   return SignalCheckerType.HaveBefore;
@@ -594,15 +594,15 @@ namespace CryptoDataCollector.CheckForSignall
         public bool IsConfirmed(double lastIndicator, double currentIndicator, HighLowType highLowType)
         {
             if (highLowType == HighLowType.High)
-                if (SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Open = LastCandle.Open, Close = LastCandle.Close }) == CandleType.Red &&
-                SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) != CandleType.Red
+                if (SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Open = LastCandle.Open, Close = LastCandle.Close }) == CandleType.Red &&
+                SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) != CandleType.Red
                     || currentIndicator < lastIndicator)
                     return true;
                 else
                     return false;
             if (highLowType == HighLowType.Low)
-                if (SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Open = LastCandle.Open, Close = LastCandle.Close }) != CandleType.Red &&
-                SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) == CandleType.Red
+                if (SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Open = LastCandle.Open, Close = LastCandle.Close }) != CandleType.Red &&
+                SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) == CandleType.Red
                 || currentIndicator > lastIndicator)
                     return true;
                 else
@@ -619,7 +619,7 @@ namespace CryptoDataCollector.CheckForSignall
             var sr = GetSupportResistence();
             if (_TradeType == TradeType.Long)
             {
-                if (SignalExtensions.SelectTopOfBodyCandle(new BaseSignalCheckingModel() { Open = LastCandle.Open, Close = LastCandle.Close }) >= sr.Support)
+                if (SignalExtensions.SelectTopOfBodyCandle(new BaseRichCandleStickModel() { Open = LastCandle.Open, Close = LastCandle.Close }) >= sr.Support)
                 {
                     if (LastCandle.Low <= sr.Support || SignalExtensions.GetPercentWithDiffrences(LastCandle.Low, sr.Support) <= 0.1M)
                     {
@@ -629,7 +629,7 @@ namespace CryptoDataCollector.CheckForSignall
             }
             else if (_TradeType == TradeType.Short)
             {
-                if (SignalExtensions.SelectBottomOfBodyCandle(new BaseSignalCheckingModel() { Open = LastCandle.Open, Close = LastCandle.Close }) <= sr.Resistence)
+                if (SignalExtensions.SelectBottomOfBodyCandle(new BaseRichCandleStickModel() { Open = LastCandle.Open, Close = LastCandle.Close }) <= sr.Resistence)
                 {
                     if (LastCandle.High >= sr.Resistence || SignalExtensions.GetPercentWithDiffrences(sr.Resistence, LastCandle.High) <= 0.1M)
                     {
@@ -801,8 +801,8 @@ namespace CryptoDataCollector.CheckForSignall
 
             int count = 0;
             //is high?
-            if (SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) != CandleType.Red &&
-                SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 1].Close, Open = AllList[AllList.Count - 1].Open }) == CandleType.Red)
+            if (SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) != CandleType.Red &&
+                SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 1].Close, Open = AllList[AllList.Count - 1].Open }) == CandleType.Red)
             {
                 for (int i = AllList.Count - pivotPeriod - 1; i < AllList.Count - 1; i++)
                 {
@@ -819,8 +819,8 @@ namespace CryptoDataCollector.CheckForSignall
             }
             count = 0;
             //is low?
-            if (SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) == CandleType.Red &&
-                SignalExtensions.GetCandleType(new BaseSignalCheckingModel() { Close = AllList[AllList.Count - 1].Close, Open = AllList[AllList.Count - 1].Open }) != CandleType.Red)
+            if (SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 2].Close, Open = AllList[AllList.Count - 2].Open }) == CandleType.Red &&
+                SignalExtensions.GetCandleType(new BaseRichCandleStickModel() { Close = AllList[AllList.Count - 1].Close, Open = AllList[AllList.Count - 1].Open }) != CandleType.Red)
             {
                 for (int i = AllList.Count - pivotPeriod - 1; i < AllList.Count - 1; i++)
                 {
@@ -1017,9 +1017,9 @@ namespace CryptoDataCollector.CheckForSignall
             return pl;
 
         }
-        public BaseSignalCheckingModel GetBaseSignalCheckingModel(CandleStichDivergengeSRSignalCheckingModel model)
+        public BaseRichCandleStickModel GetBaseSignalCheckingModel(RichCandleStickModel model)
         {
-            return new BaseSignalCheckingModel()
+            return new BaseRichCandleStickModel()
             {
                 Close = model.Close,
                 High = model.High,
@@ -1031,9 +1031,9 @@ namespace CryptoDataCollector.CheckForSignall
                 Changable = (double)(model.Open + model.Close) / 2
             };
         }
-        public List<BaseSignalCheckingModel> GetBaseSignalCheckingList(List<CandleStichDivergengeSRSignalCheckingModel> list)
+        public List<BaseRichCandleStickModel> GetBaseSignalCheckingList(List<RichCandleStickModel> list)
         {
-            return list.Select(p => new BaseSignalCheckingModel()
+            return list.Select(p => new BaseRichCandleStickModel()
             {
                 Close = p.Close,
                 High = p.High,

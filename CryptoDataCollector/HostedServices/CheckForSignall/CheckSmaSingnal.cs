@@ -718,7 +718,7 @@ namespace CryptoDataCollector.CheckForSignall
             if (((greatSma - lessSma) / lessSma) * 100 < 0.04)
                 return false;
 
-            var candleType = SignalExtensions.GetCandleType(AllList.Select(p => new BaseSignalCheckingModel()
+            var candleType = SignalExtensions.GetCandleType(AllList.Select(p => new BaseRichCandleStickModel()
             {
                 Close = p.Close,
                 High = p.High,
@@ -1451,9 +1451,9 @@ namespace CryptoDataCollector.CheckForSignall
             var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
             return (long)date.Subtract(baseDate).TotalSeconds;
         }
-        public BaseSignalCheckingModel GetBaseSignalCheckingModel(SmaSignalCheckingModel model)
+        public BaseRichCandleStickModel GetBaseSignalCheckingModel(SmaSignalCheckingModel model)
         {
-            return new BaseSignalCheckingModel()
+            return new BaseRichCandleStickModel()
             {
                 Close = model.Close,
                 High = model.High,
@@ -1465,9 +1465,9 @@ namespace CryptoDataCollector.CheckForSignall
                 Changable = (double)(model.Open + model.Close) / 2
             };
         }
-        public List<BaseSignalCheckingModel> GetBaseSignalCheckingList(List<SmaSignalCheckingModel> list)
+        public List<BaseRichCandleStickModel> GetBaseSignalCheckingList(List<SmaSignalCheckingModel> list)
         {
-            return list.Select(p => new BaseSignalCheckingModel()
+            return list.Select(p => new BaseRichCandleStickModel()
             {
                 Close = p.Close,
                 High = p.High,

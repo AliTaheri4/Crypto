@@ -4,6 +4,7 @@ using CryptoDataCollector.Enums;
 using CryptoDataCollector.Models;
 using Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using MyProject.HostedServices.CheckForSignall;
 using System;
 using System.Collections.Generic;
 using System.Linq;

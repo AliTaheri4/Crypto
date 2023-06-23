@@ -22,7 +22,7 @@ namespace CryptoDataCollector.HostedServices
         public TradeServices _tradeServices { get; set; }
         public ApplicationDbContext _context { get; set; }
         public readonly IDbConnection _dbConnection;
-        public List<CandleStichDivergengeSRSignalCheckingModel> List { get; set; } = new List<CandleStichDivergengeSRSignalCheckingModel>();
+        public List<RichCandleStickModel> List { get; set; } = new List<RichCandleStickModel>();
         public int _symbol { get; set; } = (int)Symbol.BTC;
         public SignalType _signalType { get; set; } = SignalType.LastTwoBigCandles;
         public static TimeFrameType _timeFrame { get; set; } = TimeFrameType.Minute30;
@@ -219,12 +219,12 @@ namespace CryptoDataCollector.HostedServices
 
 
 
-                    var listTemp = new List<CandleStichDivergengeSRSignalCheckingModel>();
+                    var listTemp = new List<RichCandleStickModel>();
                     for (int i = 1; i < quotesList.Count; i++)
                     {
 
                         if (i <= quotesListCount)
-                            listTemp.Add(new CandleStichDivergengeSRSignalCheckingModel()
+                            listTemp.Add(new RichCandleStickModel()
                             {
                                 Open = quotesList[i].Open,
                                 High = quotesList[i].High,
@@ -254,7 +254,7 @@ namespace CryptoDataCollector.HostedServices
 
                     }
 
-                    var checkSingnal = new CheckLastTwoCandlesSingnal(_context, _dbConnection);
+                    var checkSingnal = new CheckLastTwoCandlesSingnal<RichCandleStickModel>(_context, _dbConnection);
                     List.AddRange(listTemp);
                     List = List.DistinctBy(p => p.DateTime).ToList();
                     var lastCandle = List.Last();

@@ -6,7 +6,7 @@ namespace CryptoDataCollector.BussinesExtensions
 {
     public static class SignalExtensions
     {
-        public static ChartProcessType GetChartProcessType(List<BaseSignalCheckingModel> list, int countLasts)
+        public static ChartProcessType GetChartProcessType(List<BaseRichCandleStickModel> list, int countLasts)
         {
             var lastCandles = list.TakeLast(countLasts).ToList();
             if (lastCandles[0].Pivot + ((lastCandles[0].Pivot / 10000) * 5) < lastCandles[countLasts - 1].Pivot)
@@ -21,7 +21,7 @@ namespace CryptoDataCollector.BussinesExtensions
                 return ChartProcessType.Flat;
         }
 
-        public static decimal SelectBottomOfBodyCandle(BaseSignalCheckingModel model)
+        public static decimal SelectBottomOfBodyCandle(BaseRichCandleStickModel model)
         {
 
             if (model.Open < model.Close)
@@ -29,7 +29,7 @@ namespace CryptoDataCollector.BussinesExtensions
 
             return model.Close;
         }
-        public static decimal SelectTopOfBodyCandle(BaseSignalCheckingModel model)
+        public static decimal SelectTopOfBodyCandle(BaseRichCandleStickModel model)
         {
 
             if (model.Open > model.Close)
@@ -79,7 +79,7 @@ namespace CryptoDataCollector.BussinesExtensions
             // var percent = ((great - less) / less) * 100;
             return percent;
         }
-        public static CandleType GetCandleType(BaseSignalCheckingModel candle)
+        public static CandleType GetCandleType(BaseRichCandleStickModel candle)
         {
             if (candle.Open > candle.Close)
                 return CandleType.Red;
@@ -246,9 +246,9 @@ namespace CryptoDataCollector.BussinesExtensions
         public static List<CandleStickType> GetCandleStick(List<Candle> candles)
         {
             var current = candles.Last();
-            var currentColor = GetCandleType(new BaseSignalCheckingModel() { Open = current.Open, High = current.High, Low = current.Low, Close = current.Close });
+            var currentColor = GetCandleType(new BaseRichCandleStickModel() { Open = current.Open, High = current.High, Low = current.Low, Close = current.Close });
             var before = candles.TakeLast(2).First();
-            var beforeColor = GetCandleType(new BaseSignalCheckingModel() { Open = before.Open, High = before.High, Low = before.Low, Close = before.Close });
+            var beforeColor = GetCandleType(new BaseRichCandleStickModel() { Open = before.Open, High = before.High, Low = before.Low, Close = before.Close });
 
             var res = new List<CandleStickType>();
 
@@ -271,6 +271,15 @@ namespace CryptoDataCollector.BussinesExtensions
                 res.Add(CandleStickType.BulishHarami);
             }
             return res;
+        }
+
+        public static DateTime RemoveSecondTicks(this DateTime dateTime, bool toPersianDt = false)
+        {
+            var dt = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0);
+            if (toPersianDt)
+                dt = dt.AddMinutes(-210);
+
+            return dt;
         }
     }
 }
